@@ -1,14 +1,10 @@
 pipeline {
     agent any
-    options {
-        buildDiscarder(logRotator(numToKeepStr: '5'))
-    }
     stages {
-        stage('Scan') {
+        stage('SonarQube Analysis') {
             steps {
-                withSonarQubeEnv(installationName: 'sq1') {
-                    bat '"C:\\Program Files\\apache-maven-3.8.6\\bin\\mvn" clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
-
+                dir('your-maven-project-directory') {
+                    sh 'mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
                 }
             }
         }
