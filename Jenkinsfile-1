@@ -3,8 +3,8 @@ pipeline {
     stages {
         stage('SonarQube Analysis') {
             steps {
-                dir('your-maven-project-directory') {
-                    sh 'mvn clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
+                withSonarQubeEnv(installationName: 'sq1') {
+                     bat '"C:\\Program Files\\apache-maven-3.8.6\\bin\\mvn" clean org.sonarsource.scanner.maven:sonar-maven-plugin:3.9.0.2155:sonar'
                 }
             }
         }
